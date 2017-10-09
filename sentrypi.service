@@ -1,0 +1,11 @@
+[Unit]
+Description=SentryPi
+After=multi-user.target
+ 
+[Service]
+Type=simple
+ExecStart=/usr/bin/python /home/pi/iot/sentrypi-service.py
+Restart=always
+ 
+[Install]
+WantedBy=multi-user.target

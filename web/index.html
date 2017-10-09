@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="shortcut icon" type="image/x-icon" href="favicon.ico" />
+<style>
+.container {
+  width: 80%;
+  margin: 15px auto;
+}
+
+.containerform {
+  width: 80%;
+  margin: 15px auto;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 10px;
+  text-align: center;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0px;
+  margin-left:auto; 
+  margin-right:auto;
+}
+
+table,
+th,
+td {
+  padding: 5px;
+  border: 1px solid green;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 12px;
+  text-align: center;
+}
+
+h2 {
+  font-weight: bold;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 20px;
+}
+
+p {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 10px;
+  text-align: center;
+}
+
+</style>
+<title>SentryPI Monitoring Dashboard</title>
+</head>
+
+<body>
+
+<div class="container">
+  <h2>SentryPi - Current Status</h2>
+  <div>
+    <table>
+	    <tr>
+	    <td rowspan="2"><img src="home.png" alt="home" height="64" width="64"></td>
+	    <td><b>Outside</b><br><a id="outsideTemp">--</a>°F</td>
+	    <td><b>Garage</b><br><a id="garageTemp">--</a>°F</td>
+	    <td><b>Freezer</b><br><a id="freezerTemp">--</a>°F</td>
+	    <td><b>Door</b><br><a id="doorState">--</a></td>
+	    </tr>
+	    <tr>
+	    <td><b>Inside</b><br><a id="insideTemp">--</a>°F</td>
+	    <td><b>Humidity</b><br><a id="garageHumidity">--</a>%</td>
+	    <td><b>RPi</b><br><a id="rpiTemp">--</a>°F</td>
+	    <td><b>Pressure</b><br><a id="bmpPressure">--</a> hPa</td>
+	    </tr>
+    </table>
+    <p id="title-ts">--</p>
+  </div>
+</div>
+
+<div class="containerform">
+  Duration: 
+  <form action=".">
+    <select name="duration" id="durationSelect">
+    <option value="86400000">24 Hours</option>
+    <option value="172800000">48 Hours</option>
+    <option value="604800000">1 Week</option>
+    <option value="1209600000">2 Weeks</option>
+    <option value="2419200000">1 Month</option>
+    <option value="4838400000">2 Months</option>
+    <option value="14515200000">6 Months</option>
+    <option value="290304000012">1 Year</option>
+    </select>
+    <input type="submit">
+  </form> 
+</div>
+
+<div class="container">
+  <h2 id="title-garage">SentryPI - Garage Temp</h2>
+  <div>
+    <canvas id="myChartg"></canvas>
+  </div>
+  <p id="title-showing1" class="showing">Showing last 48 hours</p>
+</div>
+
+<div class="container">
+  <h2 id="title-freezer">SentryPI - Freezer Temp</h2>
+  <div>
+    <canvas id="myChartf"></canvas>
+  </div>
+  <p id="title-showing2" class="showing">Showing last 48 hours</p>
+</div>
+</div>
+
+<div class="container">
+  <h2 id="title-rpi">SentryPI - RPi Temp</h2>
+  <div>
+    <canvas id="myChartr"></canvas>
+  </div>
+  <p id="title-showing3" class="showing">Showing last 48 hours</p>
+</div>
+
+<div class="container">
+  <h2 id="title-door">SentryPI - Garage Door</h2>
+  <div>
+    <canvas id="myChartd"></canvas>
+  </div>
+  <p id="title-showing4" class="showing">Showing last 48 hours</p>
+</div>
+
+<div class="container">
+  <h2 id="title-outside">SentryPI - Outside Temp</h2>
+  <div>
+    <canvas id="myChartot"></canvas>
+  </div>
+  <p id="title-showing5" class="showing">Showing last 48 hours</p>
+</div>
+
+<div class="container">
+  <h2 id="title-inside">SentryPI - Inside Temp</h2>
+  <div>
+    <canvas id="myChartit"></canvas>
+  </div>
+  <p id="title-showing6" class="showing">Showing last 48 hours</p>
+</div>
+
+<div class="container">
+  <h2 id="title-bmp">SentryPI - Barometric Pressure</h2>
+  <div>
+    <canvas id="myChartbmp"></canvas>
+  </div>
+  <p id="title-showing7" class="showing">Showing last 48 hours</p>
+</div>
+
+<div class="container">
+  <h2 id="title-motion">SentryPI - Motion Detection</h2>
+  <div>
+    <canvas id="myChartmo"></canvas>
+  </div>
+  <p id="title-showing8" class="showing">Showing last 48 hours</p>
+</div>
+
+<div class="container">
+  <h2 id="title-cputemp">SentryPI - CPU Temp</h2>
+  <div>
+    <canvas id="myChartcpu"></canvas>
+  </div>
+  <p id="title-showing9" class="showing">Showing last 48 hours</p>
+</div>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="https://sdk.amazonaws.com/js/aws-sdk-2.1.40.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
+<script src="getdata-dial.js"></script>
+
+</body>
+</html>
+
