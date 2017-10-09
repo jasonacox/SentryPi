@@ -1,15 +1,19 @@
 #!/usr/bin/python
 #  
-# Temp Probe - Inside Status - JSON Output
+# Temp Probe - Using OneWire DS18B20 Proble w1-gpio - JSON Output
+#
+# Note: This requires that the w1-gpio interfaces are activated in the kernel
+#       via: sudo raspi-config 
+#	     or edit /boot/config.txt and add dtoverlay=w1-gpio
 
 import os
 import glob
 import time
 import datetime
 
-## read temp from DS18B20 OneWire Probe
 base_dir = '/sys/bus/w1/devices/'
-device_folder = glob.glob(base_dir + '28-0516a30ad8ff*')[0]
+# NOTE: Set the device ID here - 28-
+device_folder = glob.glob(base_dir + '28-*')[0]
 device_file = device_folder + '/w1_slave'
 
 

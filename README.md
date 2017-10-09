@@ -22,11 +22,13 @@ sudo apt-get upgrade -y
 ````
 
 ### Activate i2c and w1 Interfaces
-`sudo raspi-config`	
-`sudo vi /boot/config.txt`
+```
+sudo raspi-config
+sudo vi /boot/config.txt
+
 	dtparam=i2c_arm=on
 	dtoverlay=w1-gpio
-
+```
 ### Install Apache Web Server
 The apache web server with PHP support will be used for a local network control panel.
 ```
@@ -66,9 +68,22 @@ pip install boto3
 ```
 
 ##  Install SentryPi Files
-* Copy files to ~/iot
+Copy scripts to ~/iot
+* dht11.py - library for DHT11 humidity & temp sensor
+* sentrypi-temp - DHT11 Humidity and Temperature Probe (JSON output)
+* heartbeat.py - flash LED (set up as cron)
+* sentrypi-bmp180.py - BMP180 / BMP085 barometic probe (JSON output)
+* sentrypi-cpu.py - RPi CPU and GPU temp and load (JSON output)
+* sentrypi-door.py - Report on microswitch state open/close (JSON output)
+* sentrypi-freezer.py - OneWire (w1-gpio) Probe - Report on Freezer Temp and send Alerts based on defined thresholds
+* sentrypi-w1-temp.py - OneWire (w1-gpio) Probe - Report on Temp (JSON output) 
+* sentrypi-wifi-who.py - Scan WiFi for MAC Addresses (JSON output)
+* utils.py - Utility functions used by several scripts
+* watchdog.sh - Monitors connectivity and reboots RPi if gateway disappears (set up as cron)
+* web/ - Folder contains example HTML and Js to pull data from DynamoDB
+* sentrypi-service.py - Service to monitor door state, illuminate LED indicator when open and alert via SNS if it exceeds threshold.
 
-## Make SentryPi a Services
+## Setup SentryPi as a Service
 * Description: The sentrypi-service.py monitors for door open state and alerts vis SNS if it exceeds time limit.  The service also records motion if a motion detector is installed.
 * How to set up a script as a service: http://www.diegoacuna.me/how-to-run-a-script-as-a-service-in-raspberry-pi-raspbian-jessie/
 
