@@ -30,9 +30,9 @@ sudo vi /boot/config.txt
 	dtoverlay=w1-gpio
 ```
 ### Install Apache Web Server
+!![SentryPi Dashboard](/images/example-dashboard.png =250x)
 The apache web server with PHP support will be used for a local network control panel.
 
-!![SentryPi Dashboard](/images/example-dashboard.png)
 ```
 sudo apt-get install apache2 -y
 sudo apt-get install php5 libapache2-mod-php5 -y
@@ -85,20 +85,20 @@ ensor?qos=1" > /dev/null
 Some of the scripts also includ logic to send alerts via AWS SNS (simple notification service).  For my application, I set up a distribution group to send SMS texts to my family.
 
 ## Door Sensor (Generic Switch Sensor)
-Scripts: sentrypi-door.py - Report on microswitch state open/close (JSON output)
-![Door Graph](/images/example-doorgraph.png)
+![Door Graph](/images/example-doorgraph.png =250x)
+* Scripts: sentrypi-door.py - Report on microswitch state open/close (JSON output)
 This scripts looks for an open/close condition on a switch. 
 
 ## DHT11 Humidity and Temperature Sensor 
+![DHT11 Humidity Graph](/images/example-humidity.png =250x)
 * Scripts: sentrypi-temp.py & dht11.py  
-![DHT11 Humidity Graph](/images/example-humidity.png)
 The DHT11 sensor reads both humidity and temperature data.  It requires the DHT11 python library.  The temperature data is low resolution and not very accurate, but the humidity data is accurate enough for trending. 
 
 Update: This script has been updated to use a DS18B20 probe for temperature and the DHT11 for humidity.
 
 ## BMP180 / BMP085 Barometic Sensor 
+![BMP180 Barometric Graph](/images/example-barometric.png =250x)
 * Scripts: sentrypi-bmp180.py - BMP180 / BMP085 barometic probe (JSON output)
-![BMP180 Barometric Graph](/images/example-barometric.png)
 This sensor uses the Adafruit_BMP.BMP085 library:
 ```
 git clone https://github.com/adafruit/Adafruit_Python_BMP.git
@@ -106,25 +106,25 @@ sudo python setup.py install
 ```
 
 ## RPi CPU Sensor
+![RPi CPU Graph](/images/example-cpu.png =250x)
 * Scripts: sentrypi-cpu.py - RPi CPU and GPU temp and load (JSON output)
-![RPi CPU Graph](/images/example-cpu.png)
 This script reads the RPi CPU/GPU temperature and load.  
 
 ## Freezer Sensor
+![Freezer Temp Graph](/images/example-freezer.png =250x)
 * Scripts: sentrypi-freezer.py - OneWire (w1-gpio) Probe - Report on Freezer Temp and send Alerts based on defined thresholds
-![Freezer Temp Graph](/images/example-freezer.png)
 This script reads the value of the DS18B20 OneWire probe located inside a freezer. It has logic int he scirpt to send out alerts based on temperature warning (default 14'F) and thaw alert (default 32'F).  
 
 Note: This is a wired sensor so it require careful routing of the wire inside a freezer door so that you do not break the seal.
 
 ## Temperature Sensor - DS18B20 OneWire Probe
+![Temp Graph](/images/example-outsidetemp.png =250x)
 * Scripts: sentrypi-w1-temp.py - OneWire (w1-gpio) Probe - Report on Temp (JSON output) 
-![Temp Graph](/images/example-outsidetemp.png)
 This script reads the value of the DS18B20 OneWire probe. 
 
 Note: The OneWire sensors are designed to be on a signal bus.  There are actually 3 wires: power, ground and signal.  You should always extend to the next probe from the last one instead of going back to the RPi (do not use star topology):
 
-![1-Wire Diagram](/images/1-wire.png)
+![1-Wire Diagram](/images/1-wire.png =250x)
 
 ## Door Monitoring Services
 * sentrypi-service.py - Service to monitor door state, illuminate LED indicator when open and alert via SNS if it exceeds threshold.
