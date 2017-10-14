@@ -30,7 +30,7 @@ sudo vi /boot/config.txt
 	dtoverlay=w1-gpio
 ```
 ### Install Apache Web Server
-!![SentryPi Dashboard](/images/example-dashboard.png)
+![SentryPi Dashboard](/images/example-dashboard.png)
 The apache web server with PHP support will be used for a local network control panel.
 
 ```
@@ -64,14 +64,14 @@ Register the Raspberry Pi as an AWS IoT device.
 * Copy cert pem and keys to ~/iot/certs folder.
 
 ### Install Library for AWS Services used by SentryPi: IoT, SQS, SNS, DynamoDB
-```
+```python
 pip install boto3
 ```
 
 #  SentryPi Modules
 * Copy these scripts to ~/iot
 * Most of the scripts produce JSON output that can be sent to AWS IoT & DynamoDB for creating dashboards, graphs and other functions.  The following example script can be set up via cron to poll and record state:
-```
+```bash
 # Poll Sensor Probe and Record state
 TD=`sudo python /home/pi/iot/sentrypi-temp.py`
 # Record Result 
@@ -86,12 +86,12 @@ Some of the scripts also includ logic to send alerts via AWS SNS (simple notific
 
 ## Door Sensor (Generic Switch Sensor)
 ![Door Graph](/images/example-doorgraph.png)
-* Scripts: sentrypi-door.py - Report on microswitch state open/close (JSON output)
+* Script: [sentrypi-door.py] - Report on microswitch state open/close (JSON output)
 This scripts looks for an open/close condition on a switch. 
 
 ## DHT11 Humidity and Temperature Sensor 
 ![DHT11 Humidity Graph](/images/example-humidity.png)
-* Scripts: sentrypi-temp.py & dht11.py  
+* Scripts: [sentrypi-temp.py] & [dht11.py]  
 The DHT11 sensor reads both humidity and temperature data.  It requires the DHT11 python library.  The temperature data is low resolution and not very accurate, but the humidity data is accurate enough for trending. 
 
 Update: This script has been updated to use a DS18B20 probe for temperature and the DHT11 for humidity.
@@ -110,21 +110,22 @@ sudo python setup.py install
 * Scripts: sentrypi-cpu.py - RPi CPU and GPU temp and load (JSON output)
 This script reads the RPi CPU/GPU temperature and load.  
 
-## Freezer Sensor
+## Temperature Sensor - DS18B20 1-Wire Probe
+![Temp Graph](/images/example-outsidetemp.png)
+* Scripts: sentrypi-w1-temp.py - 1-Wire (w1-gpio) Probe - Report on Temp (JSON output) 
+This script reads the value of the DS18B20 1-Wire probe.  Each probe has a unique identifier and once attached, it will be registered in the `/sys/bus/w1/devices/` directory.  Look for idenfiers with a "28-" prefix.  Update the script with the probe ID you want to use.
+
+Note: The 1-Wire sensors are designed to be on a signal bus.  There are actually 3 wires: power, ground and signal.  You should always extend to the next probe from the last one instead of going back to the RPi (do not use star topology):
+
+![1-Wire Diagram](/images/1-wire.png)
+
+## Freezer Sensor - DS18B20 1-Wire Probe
 ![Freezer Temp Graph](/images/example-freezer.png)
-* Scripts: sentrypi-freezer.py - OneWire (w1-gpio) Probe - Report on Freezer Temp and send Alerts based on defined thresholds
-This script reads the value of the DS18B20 OneWire probe located inside a freezer. It has logic int he scirpt to send out alerts based on temperature warning (default 14'F) and thaw alert (default 32'F).  
+* Scripts: sentrypi-freezer.py - 1-Wire (w1-gpio) Probe - Report on Freezer Temp and send Alerts based on defined thresholds
+This script reads the value of the DS18B20 1-Wire probe located inside a freezer. It has logic int he scirpt to send out alerts based on temperature warning (default 14'F) and thaw alert (default 32'F).  
 
 Note: This is a wired sensor so it require careful routing of the wire inside a freezer door so that you do not break the seal.
 
-## Temperature Sensor - DS18B20 OneWire Probe
-![Temp Graph](/images/example-outsidetemp.png)
-* Scripts: sentrypi-w1-temp.py - OneWire (w1-gpio) Probe - Report on Temp (JSON output) 
-This script reads the value of the DS18B20 OneWire probe. 
-
-Note: The OneWire sensors are designed to be on a signal bus.  There are actually 3 wires: power, ground and signal.  You should always extend to the next probe from the last one instead of going back to the RPi (do not use star topology):
-
-![1-Wire Diagram](/images/1-wire.png)
 
 ## Door Monitoring Services
 * sentrypi-service.py - Service to monitor door state, illuminate LED indicator when open and alert via SNS if it exceeds threshold.
