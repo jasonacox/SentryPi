@@ -30,7 +30,7 @@ sudo vi /boot/config.txt
 	dtoverlay=w1-gpio
 ```
 ### Install Apache Web Server
-!![SentryPi Dashboard](/images/example-dashboard.png | width=250)
+!![SentryPi Dashboard](/images/example-dashboard.png)
 The apache web server with PHP support will be used for a local network control panel.
 
 ```
