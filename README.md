@@ -62,8 +62,15 @@ sudo python setup.py install
 
 ## Amazon Web Services 
 Register the Raspberry Pi as an AWS IoT device.
-* http://docs.aws.amazon.com/iot/latest/developerguide/iot-sdk-setup.html
-* Copy cert pem and keys to ~/iot/certs folder.
+Follow the directions at http://docs.aws.amazon.com/iot/latest/developerguide/iot-sdk-setup.html to:
+* Create and Attach a Thing (Device)
+* Generate certificates and policy
+* Download certificates
+
+Once all the certificates (i.e. device certificate, private key, and root CA certificate) are downloaded from AWS, copy them to the ~/iot/certs folder.
+
+Create an IoT rule to push data into DynamoDB:
+http://docs.aws.amazon.com/iot/latest/developerguide/iot-ddb-rule.html
 
 ### Install Library for AWS Services used by SentryPi: IoT, SQS, SNS, DynamoDB
 ```python
