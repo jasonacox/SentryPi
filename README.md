@@ -84,7 +84,7 @@ curl -s --cacert /home/pi/iot/certs/root-CA.crt \
 ```
 (replace file and URL with your AWS specific values)
 
-Some of the scripts also includ logic to send alerts via AWS SNS (simple notification service).  For my application, I set up a distribution group to send SMS texts to my family.
+Some of the scripts also include logic to send alerts via AWS SNS (simple notification service).  For my application, I set up a distribution group to send SMS texts to my family.
 
 ## Door Sensor (Generic Switch Sensor)
 ![Door Graph](/images/example-doorgraph.png)
