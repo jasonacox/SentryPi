@@ -151,13 +151,13 @@ sudo journalctl -f -u sentrypi.service
 ```
 
 ## WiFi Who's There?
-* sentrypi-wifi-who.py - Scan WiFi for MAC Addresses (JSON output)
+* [sentrypi-wifi-who.py](sentrypi-wifi-who.py) - Scan WiFi for MAC Addresses (JSON output)
 
 ## Utility Scripts
-* heartbeat.py - flash LED (set up as cron)
-* watchdog.sh - Monitors connectivity and reboots RPi if gateway disappears (set up as cron)
-* utils.py - Utility functions used by several scripts
+* [heartbeat.py](heartbeat.py) - flash LED (set up as cron)
+* [watchdog.sh](watchdog.sh) - Monitors connectivity and reboots RPi if gateway disappears (set up as cron)
+* [utils.py](utils.py) - Utility functions used by several scripts
 
 ## Website Dashboard and Graphs
-* web/ - Folder contains example HTML and Js to pull data from DynamoDB
+* [web/](web/) - Folder contains example HTML and Js to pull data from DynamoDB
 

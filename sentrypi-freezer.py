@@ -27,7 +27,7 @@ client = boto3.client(
     region_name="us-east-1")
 SNSTopicArn = "arn:aws:sns:us-east-1:------------:SentryPiAlerts"
 
-## read temp from DS18B20 OneWire Probe
+## read temp from DS18B20 1-Wire Probe
 base_dir = '/sys/bus/w1/devices/'
 device_folder = glob.glob(base_dir + '28-0516a30385ff*')[0]
 device_file = device_folder + '/w1_slave'

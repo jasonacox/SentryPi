@@ -1,6 +1,6 @@
 #!/usr/bin/python
 #  
-# Temp Probe - Using OneWire DS18B20 Proble w1-gpio - JSON Output
+# Temp Probe - Using 1-Wire DS18B20 Proble w1-gpio - JSON Output
 #
 # Note: This requires that the w1-gpio interfaces are activated in the kernel
 #       via: sudo raspi-config 

@@ -4,7 +4,7 @@
 #
 # Description:
 #    This script reads humidity from DHT11 sensor and temperature
-#    from a OneWire DS18B20 probe.
+#    from a 1-Wire DS18B20 probe.
 
 import os
 import glob
@@ -21,7 +21,7 @@ import RPi.GPIO as GPIO
 Temp_sensor = 14
 door_pin = 23
 
-## read temp from DS18B20 OneWire Probe
+## read temp from DS18B20 1-Wire Probe
 base_dir = '/sys/bus/w1/devices/'
 device_folder = glob.glob(base_dir + '28-*')[0]
 device_file = device_folder + '/w1_slave'
