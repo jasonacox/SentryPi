@@ -3,11 +3,11 @@ Tools to help build a home monitoring platform using a Raspberry Pi
 
 ## Setup Basics
 
-The following will help you set up your Raspbery Pi as a platform to install the SentryPi scripts.
+The following will help you set up your Raspberry Pi as a platform to install the SentryPi scripts.
 
 Required: 
 * Raspberry Pi - B+, 2 or 3
-* Wifi Dongle or Network Cable configured 
+* WiFi Dongle or Network Cable configured 
 * SD card (Recommend: 16GB or larger)
 * AWS Account (IoT, DynamoDB)
 
@@ -15,7 +15,7 @@ Required:
 Install the Raspberry Pi operating system onto an SD card.  
 https://www.raspberrypi.org/documentation/installation/installing-images/
 
-Boot the Raspbery Pi and update Rasperian packages:
+Boot the Raspberry Pi and update Rasperian packages:
 ```bash
 sudo apt-get update
 sudo apt-get upgrade -y
@@ -32,7 +32,7 @@ sudo vi /boot/config.txt
 ### Install Apache Web Server
 ![SentryPi Dashboard](/images/example-dashboard.png)
 
-The apache web server with PHP support will be used for a local network control panel.
+The Apache web server with PHP support will be used for a local network control panel.
 
 ```bash
 sudo apt-get install apache2 -y
@@ -95,7 +95,7 @@ Some of the scripts also include logic to send alerts via AWS SNS (simple notifi
 
 ## Door Sensor (Generic Switch Sensor)
 ![Door Graph](/images/example-doorgraph.png)
-* [sentrypi-door.py](sentrypi-door.py) - Report on microswitch state open/close (JSON output)
+* [sentrypi-door.py](sentrypi-door.py) - Report on micro-switch state open/close (JSON output)
 This scripts looks for an open/close condition on a switch. 
 
 ## DHT11 Humidity and Temperature Sensor 
@@ -105,9 +105,9 @@ The DHT11 sensor reads both humidity and temperature data.  It requires the DHT1
 
 Update: This script has been updated to use a DS18B20 probe for temperature and the DHT11 for humidity.
 
-## BMP180 / BMP085 Barometic Sensor 
+## BMP180 / BMP085 Barometric Sensor 
 ![BMP180 Barometric Graph](/images/example-barometric.png)
-* [sentrypi-bmp180.py](sentrypi-bmp180.py) - BMP180 / BMP085 barometic probe (JSON output)
+* [sentrypi-bmp180.py](sentrypi-bmp180.py) - BMP180 / BMP085 barometric probe (JSON output)
 This sensor uses the Adafruit_BMP.BMP085 library:
 ```bash
 git clone https://github.com/adafruit/Adafruit_Python_BMP.git
@@ -122,7 +122,7 @@ This script reads the RPi CPU/GPU temperature and load.
 ## Temperature Sensor - DS18B20 1-Wire Probe
 ![Temp Graph](/images/example-outsidetemp.png)
 * [sentrypi-w1-temp.py](sentrypi-w1-temp.py) - 1-Wire (w1-gpio) Probe - Report on Temp (JSON output) 
-This script reads the value of the DS18B20 1-Wire probe.  Each probe has a unique identifier and once attached, it will be registered in the `/sys/bus/w1/devices/` directory.  Look for idenfiers with a "28-" prefix.  Update the script with the probe ID you want to use.
+This script reads the value of the DS18B20 1-Wire probe.  Each probe has a unique identifier and once attached, it will be registered in the `/sys/bus/w1/devices/` directory.  Look for identifiers with a "28-" prefix.  Update the script with the probe ID you want to use.
 
 Note: The 1-Wire sensors are designed to be on a signal bus.  There are actually 3 wires: power, ground and signal.  You should always extend to the next probe from the last one instead of going back to the RPi (do not use star topology):
 
@@ -131,15 +131,15 @@ Note: The 1-Wire sensors are designed to be on a signal bus.  There are actually
 ## Freezer Sensor - DS18B20 1-Wire Probe
 ![Freezer Temp Graph](/images/example-freezer.png)
 * [sentrypi-freezer.py](sentrypi-freezer.py) - 1-Wire (w1-gpio) Probe - Report on Freezer Temp and send Alerts based on defined thresholds
-This script reads the value of the DS18B20 1-Wire probe located inside a freezer. It has logic int he scirpt to send out alerts based on temperature warning (default 14'F) and thaw alert (default 32'F).  
+This script reads the value of the DS18B20 1-Wire probe located inside a freezer. It has logic int he script to send out alerts based on temperature warning (default 14'F) and thaw alert (default 32'F).  
 
 Note: This is a wired sensor so it require careful routing of the wire inside a freezer door so that you do not break the seal.
 
 ## Door Monitoring Services
 * [sentrypi-service.py](sentrypi-service.py) - Service to monitor door state, illuminate LED indicator when open and alert via SNS if it exceeds threshold.
-This script is set up as service to monitor a switch state to indicate door open or close. Once the door is open, it activates an LED indicator and begins a counter.  Once the counter reaches an alert threshhold (default: 10 minutes) it will send out alerts via AWS SNS.
+This script is set up as service to monitor a switch state to indicate door open or close. Once the door is open, it activates an LED indicator and begins a counter.  Once the counter reaches an alert threshold (default: 10 minutes) it will send out alerts via AWS SNS.
 e
-* Description: The sentrypi-service.py monitors for door open state and alerts vis SNS if it exceeds time limit.  The service also records motion if a motion detector is installed.
+* Description: The sentrypi-service.py monitors for door open state and alerts via SNS if it exceeds time limit.  The service also records motion if a motion detector is installed.
 * How to set up a script as a service: http://www.diegoacuna.me/how-to-run-a-script-as-a-service-in-raspberry-pi-raspbian-jessie/
 
 ```bash

@@ -1,4 +1,4 @@
-// AWS Configs
+// AWS Configs - Use READ ONLY public account
 AWS.config.region = '---------';
 AWS.config.credentials = new AWS.Credentials('--------------------', '----------------------------------------');
 
