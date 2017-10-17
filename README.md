@@ -2,11 +2,10 @@
 Tools to help build a home monitoring platform using a Raspberry Pi
 
 ### Introduction
-Have you ever driven away from your house and wondered if you left the garage open? It seems like it is usually just far enough away yet with enough uncertainty to make you turn around and check.  Wouldn't it be nice to get a text message if it was up too long or go to a website to see if it was closed?  Do you ever worry about the freezer and wonder if you closed the door tight enough to keep things from thawing?  Wouldn't it be great to get an alert if the temperature gets to high?  SentryPi can help!  
-
+Have you ever driven away from your house and wondered if you left the garage open? It seems like it is usually just far enough away yet with enough uncertainty to make you turn around and check.  Wouldn't it be nice to get a text message if it was up too long or go to a website to see if it was closed?  Do you ever worry about the freezer and wonder if you closed the door tight enough to keep things from thawing?  Wouldn't it be great to get an alert if the temperature gets too high?  SentryPi can help!  
 SentryPi is a collection of Python scripts for a Raspberry Pi that use AWS services to record and notify based on sensors (switches, temperature, motion, etc.). Recorded sensor data is stored in DynamoDB that can be rendered on a dashboard with he example Chart.js graphs.
 
-For more information on installing a switch to monitor a garage door: [see details here.](http://www.jasonacox.com/wordpress/archives/355). 
+For more information on installing a switch to monitor a garage door: [see details here](http://www.jasonacox.com/wordpress/archives/355). 
 
 ## Setup Basics
 The following will help you set up your Raspberry Pi as a platform to install the SentryPi scripts.
@@ -16,6 +15,12 @@ Required:
 * WiFi Dongle or Network Cable configured 
 * SD card (Recommend: 16GB or larger)
 * AWS Account (IoT, DynamoDB)
+
+Sensors:
+* Temperature Probe - DS18B20 [Amazon](https://www.amazon.com/gp/product/B00CHEZ250/ref=oh_aui_search_detailpage?ie=UTF8&psc=1)
+* Humidity Sensor - DHT11 
+* Barometric Pressure Sensor - BMP180 
+* Sensor Kit - KOOKYE 16 in 1 [Amazon](https://www.amazon.com/gp/product/B01J9GD3DG/ref=oh_aui_search_detailpage?ie=UTF8&psc=1)
 
 ### Rasperian 
 Install the Raspberry Pi operating system onto an SD card.  
