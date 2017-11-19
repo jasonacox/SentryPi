@@ -2,7 +2,7 @@
 Tools to help build a home monitoring platform using a Raspberry Pi
 
 ### Introduction
-Have you ever driven away from your house and wondered if you left the garage open? It seems like it is usually just far enough away yet with enough uncertainty to make you turn around and check.  Wouldn't it be nice to get a text message if it was up too long or go to a website to see if it was closed?  Do you ever worry about the freezer and wonder if you closed the door tight enough to keep things from thawing?  Wouldn't it be great to get an alert if the temperature gets too high?  SentryPi can help!  
+Have you ever driven away from your house and wondered if you left the garage open? It seems like it is usually just far enough away yet with enough uncertainty to make you turn around and check.  Wouldn't it be nice to get a text message if it was open too long or go to a website to see if it was closed?  Do you ever worry about the freezer and wonder if you closed the door tight enough to keep things from thawing?  Wouldn't it be great to get an alert if the temperature gets too high?  SentryPi can help!  
 
 SentryPi is a collection of Python scripts for a Raspberry Pi that use AWS services to record and notify based on sensors (switches, temperature, motion, etc.). Recorded sensor data is stored in DynamoDB that can be rendered on a dashboard with he example Chart.js graphs.
 
@@ -41,7 +41,7 @@ sudo vi /boot/config.txt
 	dtparam=i2c_arm=on
 	dtoverlay=w1-gpio
 ```
-### Install Apache Web Server
+### Install Apache Web Server 
 ![SentryPi Dashboard](/images/example-dashboard.png)
 
 The Apache web server with PHP support will be used for a local network control panel.
@@ -51,6 +51,8 @@ sudo apt-get install apache2 -y
 sudo apt-get install php5 libapache2-mod-php5 -y
 sudo sed -i 's/short_open_tag\ =\ Off/short_open_tag\ =\ On/g' /etc/php5/apache2/php.ini
 ```
+
+### Set up RAMDISK for Temp Storage 
 Set up a temporary file system that the SentryPi panel can use for storage:
 ```bash
 sudo mkdir /var/www-tmp
@@ -103,7 +105,17 @@ curl -s --cacert /home/pi/iot/certs/root-CA.crt \
 ```
 (replace file and URL with your AWS specific values)
 
-Some of the scripts also include logic to send alerts via AWS SNS (simple notification service).  For my application, I set up a distribution group to send SMS texts to my family.
+Some of the scripts also include logic to send alerts via AWS SNS (simple notification service).  For my application, I set up a distribution group to send SMS texts to my family. To set these up, edit these scripts to include your AWS SNS topic details, example:
+
+```
+# Create an SNS client for alerts
+client = boto3.client(
+    "sns",
+    aws_access_key_id="--------------------",
+    aws_secret_access_key="----------------------------------------",
+    region_name="us-east-1")
+SNSTopicArn = "arn:aws:sns:us-east-1:------------:SentryPiAlerts"
+```
 
 ## Door Sensor (Generic Switch Sensor)
 ![Door Graph](/images/example-doorgraph.png)
@@ -170,6 +182,10 @@ sudo systemctl status sentrypi.service
 # Check service's log
 sudo journalctl -f -u sentrypi.service
 ```
+
+## Website Monitor
+* [sentrypi-website.py](sentrypi-website.py) - Checks to see if a website is running and records the time (ms) to download the URL. Additionally, this script will send SNS messages if the site is down for 2 consecutive tries.
+
 
 ## WiFi Who's There?
 * [sentrypi-wifi-who.py](sentrypi-wifi-who.py) - Scan WiFi for MAC Addresses (JSON output)
