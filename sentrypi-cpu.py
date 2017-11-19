@@ -1,6 +1,9 @@
 #!/usr/bin/python
 #  
 # Temp Probe - CPU Status - JSON Output
+#
+# Jason A. Cox, @jasonacox
+#   https://github.com/jasonacox/SentryPI
 
 import os
 import glob

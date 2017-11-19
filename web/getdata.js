@@ -1,4 +1,10 @@
-// AWS Configs - Use READ ONLY public account
+// SentryPi - Javascript to render monitoring graphs from AWS DynamoDB
+// to web.
+//
+// Jason A. Cox, @jasonacox
+//   https://github.com/jasonacox/SentryPI
+//
+//// AWS Configs - Use READ ONLY public account
 AWS.config.region = '---------';
 AWS.config.credentials = new AWS.Credentials('--------------------', '----------------------------------------');
 

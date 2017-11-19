@@ -7,6 +7,9 @@
 #    This script reads the 1-wire freezer temperature and prints JSON
 #    Additionally, this script will send SNS messages if temperature
 #    rises above ALERTTEMP or above freezing.
+#
+# Jason A. Cox, @jasonacox
+#   https://github.com/jasonacox/SentryPI
 
 import os
 import RPi.GPIO as io

@@ -8,6 +8,9 @@
 #    Service to watch door status and alert if door is left open too long.
 #    Uses motion sensor to detect motion and delay alert.
 #    Illuminates LED when door is open.
+#
+# Jason A. Cox, @jasonacox
+#   https://github.com/jasonacox/SentryPI
 
 # load libraries
 import os

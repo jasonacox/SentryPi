@@ -2,6 +2,8 @@
 #
 # SentryPi - Utility Functions
 #
+# Jason A. Cox, @jasonacox
+#   https://github.com/jasonacox/SentryPI
 
 
 # sectext - Convert Seconds into days, hours, minutes and seconds

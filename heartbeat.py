@@ -1,6 +1,9 @@
 #!/usr/bin/python
 #
 # Simple Heartbeat Script to flash LED
+#
+# Jason A. Cox, @jasonacox
+#   https://github.com/jasonacox/SentryPI
 
 import glob
 import time

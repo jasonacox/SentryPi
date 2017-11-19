@@ -1,6 +1,9 @@
 #!/usr/bin/python
 #
 # Garage Door Status - JSON Output
+#
+# Jason A. Cox, @jasonacox
+#   https://github.com/jasonacox/SentryPI
 
 import glob
 import time

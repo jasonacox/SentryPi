@@ -4,6 +4,9 @@
 #
 # Description:
 #    This script scans WiFi for MAC addressess and returns JSON list
+#
+# Jason A. Cox, @jasonacox
+#   https://github.com/jasonacox/SentryPI
 
 import os
 import glob

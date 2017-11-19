@@ -6,6 +6,8 @@
 #   This watchdown scripts monitors connectivity to the gateway
 #   and if it fail to respond 10 times, it will reboot the RPi
 #
+# Jason A. Cox, @jasonacox
+#   https://github.com/jasonacox/SentryPI
 
 GW=`/sbin/ip route | awk '/default/ { print $3 }'`
 #GW=10.1.1.1

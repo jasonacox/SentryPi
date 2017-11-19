@@ -5,6 +5,9 @@
 # Note: This requires that the w1-gpio interfaces are activated in the kernel
 #       via: sudo raspi-config 
 #	     or edit /boot/config.txt and add dtoverlay=w1-gpio
+#
+# Jason A. Cox, @jasonacox
+#   https://github.com/jasonacox/SentryPI
 
 import os
 import glob

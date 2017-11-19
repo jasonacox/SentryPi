@@ -9,6 +9,9 @@
     the time (ms) to download the URL. Additionally, this script 
     will send SNS messages if the site is down for 2 consecutive tries.
 """
+#
+# Jason A. Cox, @jasonacox
+#   https://github.com/jasonacox/SentryPI
 
 import os
 import time

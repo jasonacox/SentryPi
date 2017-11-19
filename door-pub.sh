@@ -6,6 +6,8 @@
 #    This script is run by the sentrypi service daemon to record
 #    state change of the door - open or closed in dynamodb
 #
+# Jason A. Cox, @jasonacox
+#   https://github.com/jasonacox/SentryPI
 
 TD=`sudo python /home/pi/iot/sentrypi-door.py`
 curl -s --cacert /home/pi/iot/certs/root-CA.crt \

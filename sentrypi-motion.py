@@ -2,6 +2,9 @@
 #
 # This script reads the value from file written by the
 # sentrypi service and publishes the JSON
+#
+# Jason A. Cox, @jasonacox
+#   https://github.com/jasonacox/SentryPI
 
 import time
 import os

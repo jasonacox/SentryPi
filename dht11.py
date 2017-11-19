@@ -1,6 +1,9 @@
 #!/usr/bin/python
 #  
 # DHT11 Sensor Library - Temperature and Humidity
+#
+# Jason A. Cox, @jasonacox
+#   https://github.com/jasonacox/SentryPI
 
 import time
 import RPi.GPIO as GPIO

@@ -1,6 +1,9 @@
 #!/usr/bin/python
 #
 # BMP085 Barometric Probe - JSON Output
+#
+# Jason A. Cox, @jasonacox
+#   https://github.com/jasonacox/SentryPI
 
 import Adafruit_BMP.BMP085 as BMP085
 import time

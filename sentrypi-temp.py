@@ -5,6 +5,9 @@
 # Description:
 #    This script reads humidity from DHT11 sensor and temperature
 #    from a 1-Wire DS18B20 probe.
+#
+# Jason A. Cox, @jasonacox
+#   https://github.com/jasonacox/SentryPI
 
 import os
 import glob
