@@ -184,6 +184,7 @@ sudo journalctl -f -u sentrypi.service
 ```
 
 ## Website Monitor
+![Website Monitor Graph](/images/example-website.png)
 * [sentrypi-website.py](sentrypi-website.py) - Checks to see if a website is running and records the time (ms) to download the URL. Additionally, this script will send SNS messages if the site is down for 2 consecutive tries.
 
 
